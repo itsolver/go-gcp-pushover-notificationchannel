@@ -18,6 +18,8 @@ RUN go mod download
 COPY cmd/server cmd/server
 COPY pushover pushover
 COPY function.go function.go
+COPY incident_type.go incident_type.go
+COPY incident_type_test.go incident_type_test.go
 
 ARG COMMIT
 ARG VERSION
