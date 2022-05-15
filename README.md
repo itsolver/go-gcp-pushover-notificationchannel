@@ -2,8 +2,7 @@
 
 [![build-container](https://github.com/DazWilkin/go-gcp-pushover-notificationchannel/actions/workflows/build.yml/badge.svg)](https://github.com/DazWilkin/go-gcp-pushover-notificationchannel/actions/workflows/build.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/DazWilkin/go-gcp-pushover-notificationchannel.svg)](https://pkg.go.dev/github.com/DazWilkin/go-gcp-pushover-notiificationchannel)
-![Go Report Card](https://goreportcard.com/report/github.com/DazWilkin/go-gcp-pushover-notificationchannel)
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/DazWilkin/go-gcp-pushover-notificationchannel)](https://goreportcard.com/report/github.com/DazWilkin/go-gcp-pushover-notificationchannel)
 + `ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:ef635a62bc4e17265036d113d1c54874b3fe3c5d`
 
 See [Using Google Monitoring Alerting to send Pushover notifications](https://https://pretired.dazwilkin.com/posts/220514/)
