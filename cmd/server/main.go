@@ -12,6 +12,7 @@ import (
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
+		log.Println("Unable to obtain `PORT` from the environment; setting as default (8080)")
 		port = "8080"
 	}
 
