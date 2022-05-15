@@ -1,8 +1,9 @@
 package pushover_notificationchannel
 
 import (
+	"bytes"
 	"encoding/json"
-	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -67,8 +68,29 @@ func Webhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Construct Pushover Message from Incident Body
+	message, err := NewMessage(body)
+	if err != nil {
+		log.Println("Unable to construct Pushover message from Incident body")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("Message:\n%+v", message)
+
+	// Execute template to convert Message into HTML
+	var buf bytes.Buffer
+	t := template.Must(template.New("message").Parse(templateMessage))
+	if err := t.Execute(&buf, message); err != nil {
+		log.Println("Unable to construct message template")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	log.Printf("HTML:\n%s", buf.String())
+
 	// Make request to Pushover
-	if err := pushoverClient.SendMessage(body.Incident.ID, fmt.Sprintf("%s: %s", body.Incident.ProjectID, body.Incident.Summary)); err != nil {
+	if err := pushoverClient.SendMessage(body.Incident.ID, buf.String()); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

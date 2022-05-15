@@ -7,6 +7,7 @@ type SendMessageRequest struct {
 	Device  string `json:"device"`
 	Title   string `json:"title"`
 	Message string `json:"message"`
+	HTML    string `json:"html"`
 }
 
 // SendMessageResponse is the type of SendMessage response messages

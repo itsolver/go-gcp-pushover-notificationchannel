@@ -37,6 +37,7 @@ func (c *Client) SendMessage(title, message string) error {
 		User:    c.UserKey,
 		Title:   title,
 		Message: message,
+		HTML:    "1",
 	}
 	rqstBytes, err := json.Marshal(rqstMsg)
 	if err != nil {

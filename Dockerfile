@@ -20,6 +20,8 @@ COPY pushover pushover
 COPY function.go function.go
 COPY incident_type.go incident_type.go
 COPY incident_type_test.go incident_type_test.go
+COPY message.go message.go
+COPY template.go template.go
 
 ARG COMMIT
 ARG VERSION
