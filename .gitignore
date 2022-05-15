@@ -2,3 +2,5 @@
 
 .env.test
 
+# Ignore Cosign private key!
+cosign.key
