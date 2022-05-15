@@ -4,7 +4,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/DazWilkin/gcp-exporter.svg)](https://pkg.go.dev/github.com/DazWilkin/go-gcp-pushover-notiificationchannel)
 ![Go Report Card](https://goreportcard.com/report/github.com/DazWilkin/go-gcp-pushover-notificationchannel)
 
-+ `go-gcp-pushover-notificationchannel:1234567890123456789012345678901234567890`
++ `ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:1234567890123456789012345678901234567890`
 
 <hr/>
 <br/>
