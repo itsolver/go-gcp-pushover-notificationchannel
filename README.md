@@ -16,7 +16,7 @@ See [Using Google Monitoring Alerting to send Pushover notifications](https://ht
 ```bash
 cosign verify \
 --key=./cosign.pub \
-ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:14b0d48224eaa862aa6e277e837805e8c38cf903
+ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:1234567890123456789012345678901234567890
 ```
 
 > **NOTE** [`cosign.pub`](/cosign.pub) may be downloaded here
