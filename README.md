@@ -8,6 +8,26 @@
 
 See [Using Google Monitoring Alerting to send Pushover notifications](https://https://pretired.dazwilkin.com/posts/220514/)
 
+
+## [Sigstore](https://sigstore.dev)
+
+`go-gcp-pushover-notificationchannel` container images are being signed by Sigstore and may be verified:
+
+```bash
+cosign verify \
+--key=./cosign.pub \
+ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:14b0d48224eaa862aa6e277e837805e8c38cf903
+```
+
+> **NOTE** [`cosign.pub`](/cosign.pub) may be downloaded here
+
+To install cosign, e.g.:
+
+```bash
+go install github.com/sigstore/cosign/cmd/cosign@latest
+```
+
+
 <hr/>
 <br/>
 <a href="https://www.buymeacoffee.com/dazwilkin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
