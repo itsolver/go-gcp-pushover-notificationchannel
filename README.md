@@ -5,7 +5,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/DazWilkin/go-gcp-pushover-notificationchannel)](https://goreportcard.com/report/github.com/DazWilkin/go-gcp-pushover-notificationchannel)
 + `ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:a6fd2a909d8921ea956fd0ea681b969158462d0a`
 
-See [Using Google Monitoring Alerting to send Pushover notifications](https://https://pretired.dazwilkin.com/posts/220514/)
+See [Using Google Monitoring Alerting to send Pushover notifications](https://pretired.dazwilkin.com/posts/220514/)
 
 
 ## [Sigstore](https://sigstore.dev)
