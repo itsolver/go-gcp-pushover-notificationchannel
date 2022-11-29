@@ -34,7 +34,7 @@ RUN BUILD_TIME=$(date +%s) && \
     ./cmd/server
 
 
-FROM gcr.io/distroless/base-debian10
+FROM gcr.io/distroless/base-debian11
 
 LABEL org.opencontainers.image.source https://github.com/DazWilkin/go-gcp-pushover-notificationchannel
 
