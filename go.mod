@@ -1,6 +1,6 @@
 module github.com/DazWilkin/go-gcp-pushover-notificationchannel
 
-go 1.19
+go 1.20
 
 require (
 	github.com/GoogleCloudPlatform/functions-framework-go v1.6.1
