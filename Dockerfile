@@ -1,4 +1,4 @@
-ARG GOLANG_VERSION="1.20"
+ARG GOLANG_VERSION="1.22"
 
 ARG PROJECT="go-gcp-pushover-notificationchannel"
 
