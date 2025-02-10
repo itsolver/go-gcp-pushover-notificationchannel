@@ -17,6 +17,21 @@ steps:
       'australia-southeast1-docker.pkg.dev/$PROJECT_ID/go-gcp-pushover/notificationchannel'
     ]
 
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'notificationchannel'
+      - '--image'
+      - 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/go-gcp-pushover/notificationchannel'
+      - '--region'
+      - 'australia-southeast1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
 images:
   - australia-southeast1-docker.pkg.dev/$PROJECT_ID/go-gcp-pushover/notificationchannel
 
