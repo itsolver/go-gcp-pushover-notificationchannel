@@ -4,11 +4,11 @@ steps:
     args: [
       'build',
       '-t', 'australia-southeast1-docker.pkg.dev/$PROJECT_ID/go-gcp-pushover/notificationchannel',
-      '--build-arg', 'PUSHOVER_TOKEN=${_PUSHOVER_TOKEN}',
-      '--build-arg', 'PUSHOVER_USER_ID=${_PUSHOVER_USER_ID}',
+      '--build-arg', 'PUSHOVER_TOKEN=$$PUSHOVER_TOKEN',
+      '--build-arg', 'PUSHOVER_USER_ID=$$PUSHOVER_USER_ID',
       '.'
     ]
-    secretEnv: ['_PUSHOVER_TOKEN', '_PUSHOVER_USER_ID']
+    secretEnv: ['PUSHOVER_TOKEN', 'PUSHOVER_USER_ID']
 
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -26,9 +26,9 @@ options:
 availableSecrets:
   secretManager:
     - versionName: projects/555879821680/secrets/PUSHOVER_A/versions/latest
-      env: '_PUSHOVER_TOKEN'
+      env: 'PUSHOVER_TOKEN'
     - versionName: projects/555879821680/secrets/PUSHOVER_USER_ID/versions/latest
-      env: '_PUSHOVER_USER_ID'
+      env: 'PUSHOVER_USER_ID'
 
 substitutions:
   _PUSHOVER_TOKEN: ${_PUSHOVER_TOKEN}
