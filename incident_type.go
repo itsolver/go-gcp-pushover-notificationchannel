@@ -1,22 +1,24 @@
 package pushover_notificationchannel
 
+import "encoding/json"
+
 type Body struct {
 	Incident Incident `json:"incident"`
 }
 type Incident struct {
-	ID           string   `json:"incident_id"`
-	ProjectID    string   `json:"scoping_project_id"`
-	ProjectNum   string   `json:"scoping_project_number"`
-	URL          string   `json:"url"`
-	Started      int      `json:"started_at"`
-	Ended        int      `json:"ended_at"`
-	State        string   `json:"state"`
-	Summary      string   `json:"summary"`
-	ResourceID   string   `json:"resource_id"`
-	ResourceName string   `json:"resource_name"`
-	Resource     Resource `json:"resource"`
-	Metric       Metric   `json:"metric"`
-	Metadata     Metadata `json:"metadata"`
+	ID           string      `json:"incident_id"`
+	ProjectID    string      `json:"scoping_project_id"`
+	ProjectNum   json.Number `json:"scoping_project_number"`
+	URL          string      `json:"url"`
+	Started      int         `json:"started_at"`
+	Ended        int         `json:"ended_at"`
+	State        string      `json:"state"`
+	Summary      string      `json:"summary"`
+	ResourceID   string      `json:"resource_id"`
+	ResourceName string      `json:"resource_name"`
+	Resource     Resource    `json:"resource"`
+	Metric       Metric      `json:"metric"`
+	Metadata     Metadata    `json:"metadata"`
 }
 type Resource struct {
 	Type   string            `json:"type"`

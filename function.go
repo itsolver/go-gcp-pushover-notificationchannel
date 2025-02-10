@@ -43,8 +43,8 @@ func Webhook(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Expect `POST` (got: `%s`)", r.Method)
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
-
 	}
+	
 	contentType := r.Header.Get("Content-Type")
 	if contentType != "application/json" {
 		log.Printf("Expect `application/json` (got: `%s`)", contentType)
@@ -59,11 +59,23 @@ func Webhook(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("Received: %s", string(data))
+	log.Printf("Received payload: %s", string(data))
 
+	// First try to parse as a test message
+	var testMsg map[string]interface{}
+	if err := json.Unmarshal(data, &testMsg); err == nil {
+		// If this is a test message, just return 200 OK
+		if _, hasIncident := testMsg["incident"]; !hasIncident {
+			log.Println("Received test message, responding with OK")
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+	}
+
+	// If not a test message, try to parse as an incident
 	body := &Body{}
 	if err := json.Unmarshal(data, body); err != nil {
-		log.Println("Unable to unmarshal message body")
+		log.Printf("Unable to unmarshal message body: %v", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
