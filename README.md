@@ -63,9 +63,10 @@ git push  # This will trigger Cloud Build to deploy
      - Endpoint URL: `https://your-service-url/webhook`
      - Leave "Use HTTP Basic Auth" unchecked
    - Click "Test Connection" to verify setup
+   - Click "Save" if successful
 
 ### 3. Create Alert Policies
-1. Go to Monitoring > Alerting
+1. Go to Observability > Monitoring > Detect > Alerting (or visit directly at https://console.cloud.google.com/monitoring/alerting)
 2. Click "Create Policy"
 3. Configure your desired monitoring conditions
 4. In the Notifications section:
