@@ -3,9 +3,8 @@
 [![build-container](https://github.com/DazWilkin/go-gcp-pushover-notificationchannel/actions/workflows/build.yml/badge.svg)](https://github.com/DazWilkin/go-gcp-pushover-notificationchannel/actions/workflows/build.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/DazWilkin/go-gcp-pushover-notificationchannel.svg)](https://pkg.go.dev/github.com/DazWilkin/go-gcp-pushover-notiificationchannel)
 [![Go Report Card](https://goreportcard.com/badge/github.com/DazWilkin/go-gcp-pushover-notificationchannel)](https://goreportcard.com/report/github.com/DazWilkin/go-gcp-pushover-notificationchannel)
-+ `ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:41364588831b35fd10b8971a384deb96051449c1`
 
-See [Using Google Monitoring Alerting to send Pushover notifications](https://pretired.dazwilkin.com/posts/220514/)
+A webhook notification channel for Google Cloud Monitoring that forwards alerts to Pushover. When alerts trigger in Cloud Monitoring, they will be sent as push notifications to your devices via Pushover.
 
 ## Prerequisites
 
@@ -28,10 +27,6 @@ Before deploying, you need to set up the following secrets in Google Cloud Secre
      echo -n "your-pushover-user-key" | gcloud secrets create PUSHOVER_USER_ID --data-file=-
      ```
 
-These secrets are automatically mapped to the following environment variables in the application:
-- `PUSHOVER_TOKEN`: Maps to the `PUSHOVER_A` secret
-- `PUSHOVER_USER_ID`: Maps to the `PUSHOVER_USER_ID` secret
-
 To get your Pushover credentials:
 1. Log in to your [Pushover account](https://pushover.net)
 2. Create a new application to get the application token
@@ -40,22 +35,34 @@ To get your Pushover credentials:
 ## Setup Instructions
 
 ### 1. Deploy the Service
-The service should be deployed to Cloud Run. You can use Cloud Build or your preferred deployment method.
+The service is automatically deployed to Cloud Run using Cloud Build. The included `cloudbuild.yaml` will:
+1. Build the container image
+2. Push it to Artifact Registry
+3. Deploy to Cloud Run with the required configuration
+
+To deploy:
+```bash
+git clone https://github.com/itsolver/go-gcp-pushover-notificationchannel.git
+cd go-gcp-pushover-notificationchannel
+git push  # This will trigger Cloud Build to deploy
+```
 
 ### 2. Configure Notification Channel
 1. **Get the Service URL**
    - Go to Google Cloud Console > Cloud Run
    - Find your `notificationchannel` service
    - Copy the service URL (format: `https://notificationchannel-xxxxx-xx.a.run.app`)
+   - **Important**: Add `/webhook` to the end of the URL
 
 2. **Create a Notification Channel**
    - Navigate to Google Cloud Console > Monitoring > Alerting > Notification channels
    - Click "Add New"
    - Select "Webhook"
    - Configure the following:
-     - Name: `Pushover Notifications`
-     - Endpoint URL: [Your Cloud Run service URL]
-     - HTTP Headers: `Content-Type: application/json`
+     - Display Name: `Pushover Notifications` (or your preferred name)
+     - Endpoint URL: `https://your-service-url/webhook`
+     - Leave "Use HTTP Basic Auth" unchecked
+   - Click "Test Connection" to verify setup
 
 ### 3. Create Alert Policies
 1. Go to Monitoring > Alerting
@@ -66,32 +73,28 @@ The service should be deployed to Cloud Run. You can use Cloud Build or your pre
 5. Save the policy
 
 ### 4. Testing
-- You can test the integration by:
-  - Setting a temporary sensitive threshold in your alert policy
-  - When triggered, you should receive Pushover notifications on your configured devices
-- The notification will include:
-  - Formatted alert data
-  - Relevant links and details
-  - Incident information
+The webhook can be tested in two ways:
+1. **Using the Test Connection button**
+   - In the webhook configuration
+   - Should receive an immediate test notification on your Pushover devices
+2. **Using an Alert Policy**
+   - Create a policy with a sensitive threshold
+   - When the condition triggers, you'll receive formatted notifications including:
+     - Alert state (open/closed)
+     - Project ID
+     - Summary of the incident
+     - Timing information
+     - System labels and metadata
 
-## [Sigstore](https://sigstore.dev)
+## Troubleshooting
+If you're not receiving notifications:
+1. Check Cloud Run logs for any errors
+2. Verify the webhook URL includes the `/webhook` path
+3. Confirm your Pushover credentials are correctly set in Secret Manager
+4. Test the webhook connection from the notification channel configuration
 
-`go-gcp-pushover-notificationchannel` container images are being signed by Sigstore and may be verified:
-
-```bash
-cosign verify \
---key=./cosign.pub \
-ghcr.io/dazwilkin/go-gcp-pushover-notificationchannel:41364588831b35fd10b8971a384deb96051449c1
-```
-
-> **NOTE** [`cosign.pub`](/cosign.pub) may be downloaded here
-
-To install cosign, e.g.:
-
-```bash
-go install github.com/sigstore/cosign/cmd/cosign@latest
-```
-
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 <hr/>
 <br/>
