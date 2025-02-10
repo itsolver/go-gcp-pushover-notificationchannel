@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	pushover_notificationchannel "github.com/DazWilkin/go-gcp-pushover-notificationchannel"
+	pushover_notificationchannel "github.com/itsolver/go-gcp-pushover-notificationchannel"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
