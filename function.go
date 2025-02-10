@@ -24,9 +24,9 @@ var (
 func init() {
 	functions.HTTP("Webhook", Webhook)
 
-	userKey := os.Getenv(("PUSHOVER_USERKEY"))
+	userKey := os.Getenv("PUSHOVER_USER_ID")
 	if userKey == "" {
-		log.Fatal("Unable to get `PUSHOVER_USERKEY` from the environment")
+		log.Fatal("Unable to get `PUSHOVER_USER_ID` from the environment")
 	}
 
 	token := os.Getenv("PUSHOVER_TOKEN")

@@ -40,7 +40,7 @@ LABEL org.opencontainers.image.source="https://github.com/itsolver/go-gcp-pushov
 
 COPY --from=build /bin/server /
 
-ENV PUSHOVER_USERKEY=""
+ENV PUSHOVER_USER_ID=""
 ENV PUSHOVER_TOKEN=""
 
 ENV PORT="8080"
