@@ -1,4 +1,4 @@
-ARG GOLANG_VERSION="1.23.3"
+ARG GOLANG_VERSION="1.23.4"
 
 ARG PROJECT="go-gcp-pushover-notificationchannel"
 
@@ -36,7 +36,7 @@ RUN BUILD_TIME=$(date +%s) && \
 
 FROM gcr.io/distroless/static
 
-LABEL org.opencontainers.image.source="https://github.com/DazWilkin/go-gcp-pushover-notificationchannel"
+LABEL org.opencontainers.image.source="https://github.com/itsolver/go-gcp-pushover-notificationchannel"
 
 COPY --from=build /bin/server /
 
