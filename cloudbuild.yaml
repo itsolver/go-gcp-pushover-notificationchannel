@@ -28,8 +28,4 @@ availableSecrets:
     - versionName: projects/555879821680/secrets/PUSHOVER_A/versions/latest
       env: 'PUSHOVER_TOKEN'
     - versionName: projects/555879821680/secrets/PUSHOVER_USER_ID/versions/latest
-      env: 'PUSHOVER_USER_ID'
-
-substitutions:
-  _PUSHOVER_TOKEN: ${_PUSHOVER_TOKEN}
-  _PUSHOVER_USER_ID: ${_PUSHOVER_USER_ID} 
+      env: 'PUSHOVER_USER_ID' 
