@@ -1,4 +1,4 @@
-module github.com/DazWilkin/go-gcp-pushover-notificationchannel
+module github.com/itsolver/go-gcp-pushover-notificationchannel
 
 go 1.23.3
 

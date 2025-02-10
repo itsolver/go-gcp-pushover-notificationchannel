@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/DazWilkin/go-gcp-pushover-notificationchannel/pushover"
+	"github.com/itsolver/go-gcp-pushover-notificationchannel/pushover"
 	"github.com/GoogleCloudPlatform/functions-framework-go/functions"
 )
 
