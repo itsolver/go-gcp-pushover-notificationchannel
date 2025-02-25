@@ -2,13 +2,8 @@ package pushover_notificationchannel
 
 const (
 	templateMessage string = `
-ProjectID: {{ .ProjectID }}
-State: <b>{{ .State }}</b>
-Summary: <font color="#0000ff">{{ .Summary }}</font>
-Period: {{ .Started }}-->{{ .Ended }}
-Metadata:
-{{- range $Key, $Val := .SystemLabels}}
-  {{ $Key }}: {{ $Val }}
-{{- end}}
-`
+{{ if .RevisionName }}Revision: {{ .RevisionName }}{{ else }}Cloud Run Update{{ end }}
+
+Status: {{ .State }}
+Project: {{ .ProjectID }}`
 )

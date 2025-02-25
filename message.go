@@ -1,23 +1,41 @@
 package pushover_notificationchannel
 
+import "strings"
+
 // Message is a type that represents the Pushover message
 type Message struct {
-	ProjectID    string
+	Title        string
+	RevisionName string
 	State        string
-	Summary      string
-	Started      int
-	Ended        int
-	SystemLabels map[string]string
+	ProjectID    string
+}
+
+// extractRevisionName gets the revision name from the full summary
+func extractRevisionName(summary string) string {
+	if strings.Contains(summary, "revision_name=") {
+		parts := strings.Split(summary, "revision_name=")
+		if len(parts) > 1 {
+			revName := strings.Split(parts[1], ",")[0]
+			revName = strings.TrimPrefix(revName, "auto-solve-thanks-tickets-")
+			revName = strings.TrimSuffix(revName, "}")
+			return revName
+		}
+	}
+	return ""
 }
 
 // NewMessage is a function that maps an Incident body into a Pushover message
 func NewMessage(body *Body) (*Message, error) {
+	// Create a human-readable title
+	title := "Cloud Run Alert"
+	if body.Incident.ResourceName != "" {
+		title = "Cloud Run: " + extractRevisionName(body.Incident.Summary)
+	}
+
 	return &Message{
-		ProjectID:    body.Incident.ProjectID,
+		Title:        title,
+		RevisionName: extractRevisionName(body.Incident.Summary),
 		State:        body.Incident.State,
-		Summary:      body.Incident.Summary,
-		Started:      body.Incident.Started,
-		Ended:        body.Incident.Ended,
-		SystemLabels: body.Incident.Metadata.SystemLabels,
+		ProjectID:    body.Incident.ProjectID,
 	}, nil
 }
